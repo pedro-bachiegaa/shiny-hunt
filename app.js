@@ -213,7 +213,6 @@ function renderShell() {
     state.store.mode === 'local' && h('div', { class: 'banner' },
       '⚠️ Modo local: os dados ficam só neste navegador. Para sincronizar com o Thivez, configure o Firebase (veja o README).'),
     state.error && h('div', { class: 'banner' }, '⚠️ Não consegui ler/gravar no Firebase: ' + state.error + '. Confira as regras do banco (README).'),
-    hero(),
     h('nav', { class: 'tabs' }, tabs.map(([id, label]) =>
       h('button', { class: state.tab === id ? 'on' : '', onclick: () => { state.tab = id; renderShell(); } }, label))),
     h('main', { id: 'view' }),
