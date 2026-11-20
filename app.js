@@ -20,6 +20,7 @@ const METHODS = {
 };
 const BY_ID = new Map(UNOVA.map((p) => [p.id, p]));
 const SESSION_KEY = 'shiny-hunt:session';
+const SUBTITLE = 'Bixos coloridos que não mudam ABSOLUTAMENTE NADA e talvez sejam até um pouco piores, pois não temos como escolher outro';
 
 /* ───────── Utilidades ───────── */
 const h = (tag, attrs, ...kids) => {
@@ -173,7 +174,7 @@ function renderWelcome() {
   root.replaceChildren(h('div', { class: 'wrap' },
     h('div', { class: 'welcome' },
       h('div', { class: 'logo' }, '✨ ', h('b', null, 'Shiny Hunt dos Crias')),
-      h('p', { style: 'color:var(--muted);margin:0' }, 'Caçada shiny da 5ª geração, com contadores sincronizados.'),
+      h('p', { style: 'color:var(--muted);margin:0' }, SUBTITLE),
       h('div', { class: 'card' },
         h('div', { style: 'font-weight:700' }, 'Quem é você?'),
         PLAYERS.map((n) => h('button', {
@@ -187,10 +188,12 @@ function renderWelcome() {
 /* ───────── Estrutura principal ───────── */
 function renderShell() {
   const s = state.session;
-  const tabs = [['hunts', '🎯 Caçadas'], ['dex', '📖 Shiny Dex'], ['history', '🏆 Histórico']];
+  const tabs = [['hunts', '🎯 Hunt'], ['dex', '📖 BugMons'], ['history', '🏆 Histórico']];
   root.replaceChildren(h('div', { class: 'wrap' },
     h('header', { class: 'top' },
-      h('div', { class: 'logo' }, '✨ ', h('b', null, 'Shiny Hunt dos Crias')),
+      h('div', { class: 'title-box' },
+        h('div', { class: 'logo' }, '✨ ', h('b', null, 'Shiny Hunt dos Crias')),
+        h('div', { class: 'subtitle' }, SUBTITLE)),
       h('div', { class: 'spacer' }),
       h('span', { class: 'chip', id: 'status' }),
       h('span', { class: 'chip', style: `color:${color(s.name)}` }, '👤 ' + s.name),
@@ -227,7 +230,7 @@ function renderHunts(view) {
     cards = new Map();
     view.dataset.built = 'hunts';
     view.replaceChildren(
-      h('div', { class: 'toolbar' }, h('button', { class: 'btn-primary', onclick: () => openHuntDialog() }, '➕ Nova caçada')),
+      h('div', { class: 'toolbar' }, h('button', { class: 'btn-primary', onclick: () => openHuntDialog() }, '➕ Nova Hunt')),
       h('div', { class: 'others', id: 'others' }),
       h('div', { class: 'grid', id: 'grid' }),
       h('div', { class: 'empty', id: 'empty' }, h('div', { class: 'big' }, '✨'), h('p', null, 'Nenhuma caçada ativa. Comece uma nova!')),
@@ -404,7 +407,7 @@ function openHuntDialog(editId, presetPokemon) {
       toast(editing ? 'Caçada atualizada' : 'Caçada iniciada! Boa sorte ✨');
     },
   },
-    h('h2', null, editing ? `Editar · ${BY_ID.get(editing.pokemonId)?.name}` : 'Nova caçada'),
+    h('h2', null, editing ? `Editar · ${BY_ID.get(editing.pokemonId)?.name}` : 'Nova Hunt'),
     pickSection,
     h('label', { class: 'f' }, 'Quem está caçando', hunter),
     h('div', { class: 'row' }, h('label', { class: 'f' }, 'Jogo', game), h('label', { class: 'f' }, 'Método', method)),
