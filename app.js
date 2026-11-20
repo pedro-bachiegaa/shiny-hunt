@@ -121,7 +121,9 @@ const loadSession = () => { try { return JSON.parse(localStorage.getItem(SESSION
 const saveSession = (s) => localStorage.setItem(SESSION_KEY, JSON.stringify(s));
 
 // A dupla é fixa: não há salas. Para mudar os nomes, edite PLAYERS (e as caçadas iniciais em SEED).
-const PLAYERS = ['Pedro', 'Thiago'];
+const PLAYERS = ['PH', 'Thivez'];
+// Nomes antigos gravados no banco são renomeados automaticamente.
+const LEGACY = { Pedro: 'PH', Everton: 'PH', Thiago: 'Thivez' };
 const ROOM = 'dupla'; // caminho único no banco, compartilhado pelos dois
 const SEED_KEY = 'shiny-hunt:seeded';
 const SEED = [
@@ -149,7 +151,10 @@ async function start(session) {
   state.store = await createStore(ROOM);
   unsub && unsub();
   unsub = state.store.subscribe(
-    (list) => { state.hunts = list; renderView(); seedIfEmpty(list); },
+    (list) => {
+      list.filter((x) => LEGACY[x.hunter]).forEach((x) => { state.store.patch(x.id, { hunter: LEGACY[x.hunter] }); x.hunter = LEGACY[x.hunter]; });
+      state.hunts = list; renderView(); seedIfEmpty(list);
+    },
     (err) => { state.error = err?.message || 'erro'; renderShell(); toast('Sem permissão no Firebase — veja as regras no README'); },
   );
   state.store.onStatus((on) => { state.online = on; updateStatus(); });
@@ -192,7 +197,7 @@ function renderShell() {
       h('button', { class: 'chip btn', onclick: leave }, 'Trocar'),
     ),
     state.store.mode === 'local' && h('div', { class: 'banner' },
-      '⚠️ Modo local: os dados ficam só neste navegador. Para sincronizar com o Thiago, configure o Firebase (veja o README).'),
+      '⚠️ Modo local: os dados ficam só neste navegador. Para sincronizar com o Thivez, configure o Firebase (veja o README).'),
     state.error && h('div', { class: 'banner' }, '⚠️ Não consegui ler/gravar no Firebase: ' + state.error + '. Confira as regras do banco (README).'),
     h('nav', { class: 'tabs' }, tabs.map(([id, label]) =>
       h('button', { class: state.tab === id ? 'on' : '', onclick: () => { state.tab = id; renderShell(); } }, label))),

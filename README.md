@@ -1,12 +1,12 @@
-# Unova Shiny Hunt ✨
+﻿# Unova Shiny Hunt ✨
 
-Contador de shiny hunt da **5ª geração (Unova, #494–#649)** para a dupla Pedro + Thiago.
+Contador de shiny hunt da **5ª geração (Unova, #494–#649)** para a dupla PH + Thivez.
 Cada um abre o link na sua casa, escolhe quem é e atualiza o próprio contador; o outro vê na hora.
 Site estático (HTML + JS puro, sem build), gratuito de hospedar. **Não tem sala nem código.**
 
 ## Como usa
-- Ao abrir pela primeira vez, toque no seu nome (Pedro ou Thiago). Fica salvo no aparelho.
-- Já vem com duas caçadas: **Tepig (Pedro)** e **Snivy (Thiago)**. Dá para editar jogo/método
+- Ao abrir pela primeira vez, toque no seu nome (PH ou Thivez). Fica salvo no aparelho.
+- Já vem com duas caçadas: **Tepig (PH)** e **Snivy (Thivez)**. Dá para editar jogo/método
   e criar outras em **➕ Nova caçada**.
 - Contador grande com **+1 / −1** (hordas somam +5). **✨ Achei o shiny!** confirma, solta confete e
   manda para o Histórico.
@@ -47,3 +47,4 @@ Abra http://localhost:8099. Sem o Firebase configurado, os dados ficam só no na
 `index.html`, `styles.css`, `app.js` (interface e lógica), `store.js` (Firebase ou local),
 `data.js` (Pokédex de Unova, da PokéAPI), `firebase-config.js` (sua configuração).
 Sprites vêm do repositório público da PokéAPI no GitHub.
+
