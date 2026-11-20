@@ -168,26 +168,12 @@ function leave() {
   renderWelcome();
 }
 
-/* ───────── Capa ───────── */
-const STARS = [[8, 14, 12], [30, 82, 9], [44, 28, 14], [60, 70, 10], [76, 18, 12], [88, 56, 9], [18, 40, 8], [94, 20, 10], [52, 90, 8], [68, 44, 9]];
-function hero() {
-  return h('section', { class: 'hero' },
-    STARS.map(([x, y, s], i) => h('span', { class: 'star', style: `left:${x}%;top:${y}%;font-size:${s}px;animation-delay:${i * 0.35}s` }, '✦')),
-    h('div', { class: 'moon' }),
-    h('img', { class: 'umb', src: 'img/umbreon-shiny.png', alt: 'Umbreon shiny' }),
-    h('div', { class: 'txt' },
-      h('div', { class: 'kicker' }, 'Geração V · Unova'),
-      h('h1', null, 'Shiny Hunt'),
-      h('p', null, PLAYERS.join(' × ') + ' · caçando com sorte e paciência ✨'),
-    ),
-  );
-}
-
 /* ───────── Boas-vindas ───────── */
 function renderWelcome() {
   root.replaceChildren(h('div', { class: 'wrap' },
-    h('div', { class: 'welcome', style: 'max-width:620px' },
-      hero(),
+    h('div', { class: 'welcome' },
+      h('div', { class: 'logo' }, '✨ ', h('b', null, 'Shiny Hunt dos Crias')),
+      h('p', { style: 'color:var(--muted);margin:0' }, 'Caçada shiny da 5ª geração, com contadores sincronizados.'),
       h('div', { class: 'card' },
         h('div', { style: 'font-weight:700' }, 'Quem é você?'),
         PLAYERS.map((n) => h('button', {
@@ -204,7 +190,7 @@ function renderShell() {
   const tabs = [['hunts', '🎯 Caçadas'], ['dex', '📖 Shiny Dex'], ['history', '🏆 Histórico']];
   root.replaceChildren(h('div', { class: 'wrap' },
     h('header', { class: 'top' },
-      h('div', { class: 'logo' }, '✨ ', h('b', null, 'Unova Shiny Hunt')),
+      h('div', { class: 'logo' }, '✨ ', h('b', null, 'Shiny Hunt dos Crias')),
       h('div', { class: 'spacer' }),
       h('span', { class: 'chip', id: 'status' }),
       h('span', { class: 'chip', style: `color:${color(s.name)}` }, '👤 ' + s.name),

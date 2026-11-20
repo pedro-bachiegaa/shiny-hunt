@@ -1,6 +1,6 @@
 {
-  "name": "Unova Shiny Hunt",
-  "short_name": "Shiny Hunt",
+  "name": "Shiny Hunt dos Crias",
+  "short_name": "Shiny Crias",
   "description": "Contador de shiny hunt de Unova (Gen 5) para PH e Thivez",
   "start_url": "./",
   "scope": "./",

@@ -1,4 +1,4 @@
-﻿# Unova Shiny Hunt ✨
+﻿# Shiny Hunt dos Crias ✨
 
 Contador de shiny hunt da **5ª geração (Unova, #494–#649)** para a dupla PH + Thivez.
 Cada um abre o link na sua casa, escolhe quem é e atualiza o próprio contador; o outro vê na hora.
