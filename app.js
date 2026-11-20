@@ -228,12 +228,16 @@ function renderHunts(view) {
     view.dataset.built = 'hunts';
     view.replaceChildren(
       h('div', { class: 'toolbar' }, h('button', { class: 'btn-primary', onclick: () => openHuntDialog() }, '➕ Nova caçada')),
+      h('div', { class: 'others', id: 'others' }),
       h('div', { class: 'grid', id: 'grid' }),
       h('div', { class: 'empty', id: 'empty' }, h('div', { class: 'big' }, '✨'), h('p', null, 'Nenhuma caçada ativa. Comece uma nova!')),
     );
   }
   const grid = document.getElementById('grid');
-  const active = state.hunts.filter((x) => x.status === 'active').sort((a, b) => a.startedAt - b.startedAt || PLAYERS.indexOf(a.hunter) - PLAYERS.indexOf(b.hunter) || a.id.localeCompare(b.id));
+  const me = state.session.name;
+  const sorted = state.hunts.filter((x) => x.status === 'active').sort((a, b) => a.startedAt - b.startedAt || a.id.localeCompare(b.id));
+  const active = sorted.filter((x) => x.hunter === me); // só as minhas viram card completo
+  renderOthers(sorted.filter((x) => x.hunter !== me));
   const seen = new Set();
   active.forEach((hunt, i) => {
     let c = cards.get(hunt.id);
@@ -244,6 +248,22 @@ function renderHunts(view) {
   });
   for (const [id, c] of cards) if (!seen.has(id)) { c.el.remove(); cards.delete(id); }
   document.getElementById('empty').style.display = active.length ? 'none' : '';
+}
+
+// Faixa pequena com o que o outro está caçando (só leitura).
+function renderOthers(list) {
+  const el = document.getElementById('others');
+  const friend = PLAYERS.find((n) => n !== state.session.name) || 'Amigo';
+  el.replaceChildren(
+    h('span', { class: 'o-label', style: `color:${color(friend)}` }, '👀 ' + friend),
+    ...(list.length
+      ? list.map((x) => h('div', { class: 'o-chip' },
+        shinyStill(x.pokemonId),
+        h('div', null,
+          h('b', null, BY_ID.get(x.pokemonId)?.name || '???'),
+          h('span', null, `${fmtN(x.count || 0)} ${METHODS[x.method]?.unit || 'encontros'}`))))
+      : [h('span', { class: 'o-none' }, 'sem caçada ativa')]),
+  );
 }
 
 function getHunt(id) { return state.hunts.find((x) => x.id === id); }

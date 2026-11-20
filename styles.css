@@ -119,6 +119,15 @@ nav.tabs button.on { background: linear-gradient(135deg, var(--gold), var(--gold
 .empty { text-align: center; color: var(--muted); padding: 50px 10px; border: 1px dashed var(--card-b); border-radius: var(--radius); }
 .empty .big { font-size: 2.4rem; }
 
+/* Faixa do outro jogador */
+.others { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin: 0 0 14px; padding: 8px 14px; border-radius: 14px; background: var(--card); border: 1px solid var(--card-b); backdrop-filter: blur(6px); }
+.o-label { font-weight: 700; font-size: .85rem; }
+.o-chip { display: flex; align-items: center; gap: 8px; }
+.o-chip img { width: 38px; height: 38px; image-rendering: pixelated; object-fit: contain; }
+.o-chip b { display: block; font-size: .88rem; line-height: 1.1; }
+.o-chip span { color: var(--muted); font-size: .76rem; font-variant-numeric: tabular-nums; }
+.o-none { color: var(--muted); font-size: .8rem; }
+
 /* Shiny Dex */
 .progress-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
 .progress-top .bar { flex: 1; min-width: 160px; height: 12px; }
